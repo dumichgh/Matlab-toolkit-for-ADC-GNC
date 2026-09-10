@@ -1,5 +1,6 @@
 # Matlab-toolkit-for-Apparent-Diffusion-Coefficient-GNL-correction
 Collection of Matlab (R2019b+) p-coded libraries to build exam-specific b-value GNL corrector maps from master corrector  (in magnet frame) for the DWI series of interest (in image frame)
+
 FUNCTIONALITY
 "UMadcGNCtr_R1" distribution contains Matlab p-combo libraries to
 (i) build master (trace) corrector for b-value from system GNL tensor 
