@@ -17,8 +17,8 @@ FUNCTIONALITY
 The detailed descriptions of INPUT and OUTPUT structures of each processing
 step are included in the "README" files for the three main workflow routines:
 "buildSysTrGNLmap.p", "scaninfo_combo.p", and "buildGNCav4trdwi_combo.p"
-(Additional auxiliary p-code is provided for dependencies not included 
-in the main libraries for MATLAB R2019b+)
+(Additional auxiliary p-code is provided in "utils" folder for dependencies 
+not included in the "main" p-libraries for MATLAB R2019b+)
 
 PREREQUISITES:
 
