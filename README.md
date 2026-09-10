@@ -2,7 +2,9 @@
 Collection of Matlab (R2019b+) p-coded libraries to build exam-specific b-value GNL corrector maps from master corrector  (in magnet frame) for the DWI series of interest (in image frame)
 
 FUNCTIONALITY
+
 "UMadcGNCtr_R1" distribution contains Matlab p-combo libraries to
+
 (i) build master (trace) corrector for b-value from system GNL tensor 
     in magnet frame (or use a pre-built one, if provided)
 (ii) catalogue scan exam series (containing DWI trace)
@@ -17,6 +19,7 @@ step are included in the "README" files for the three main workflow routines:
 in the main libraries for MATLAB R2019b+)
 
 PREREQUISITES:
+
 (A) Scan/exam folder containing single-frame DICOM for all acquired DWI series
 with all b-values and three orthogonal directions (or trace-DWI) stored in
 a single series.
@@ -26,6 +29,7 @@ a single series.
 gradient SPH coefficient tables, or gradient field MHDs.)
 
 USAGE
+
 (1) Have all p-code (including utility functions from "utils" folder) placed 
 in Matlab path.
 
