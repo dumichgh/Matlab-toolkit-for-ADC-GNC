@@ -33,6 +33,3 @@ a single series.
 (C) Characteristic system diameter ("sysD") used for GNL tensor (e.g., 2*Rsys from
 gradient SPH coefficient tables, or gradient field MHDs.)
 
-
----------------------------------------------------------------------------------------
-Authors: Thomas Chenevert (tlchenev@umich.edu) and Dariya Malyarenko (dariya@umich.edu)
