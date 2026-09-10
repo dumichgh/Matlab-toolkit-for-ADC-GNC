@@ -7,12 +7,12 @@ FUNCTIONALITY
 
 (i) build master (trace) corrector for b-value from system GNL tensor 
     in magnet frame (or use a pre-built one, if provided)
+	
 (ii) catalogue scan exam series (containing DWI trace)
 
 (iii) build exam-specific b-corrector maps from master corrector 
     (in magnet frame) for the DWI series of interest (in image frame)
-
-(iv) apply GNL correction to ADC via b-value correction map
+	to apply GNL correction via b-value map scaling (ADC(GNC)=ADC./bmap)
 
 The detailed descriptions of INPUT and OUTPUT structures of each processing
 step are included in the "README" files for the three main workflow routines:
@@ -31,53 +31,6 @@ a single series.
 
 (C) Characteristic system diameter ("sysD") used for GNL tensor (e.g., 2*Rsys from
 gradient SPH coefficient tables, or gradient field MHDs.)
-
-USAGE
-
-(1) Have all p-code (including utility functions from "utils" folder) placed 
-in Matlab path.
-
-(2) Create dedicated data analysis folder, and copy exam DICOM folder and 
-system GNL tensor (or corrector maps) mat-files there. 
-
-(2.5) Skip steps 3 & 4 if pre-built b-map corrector is available and load it
->> load('trGNLmap_YourSystemGNL.mat', 'cmap')  % pre-built average corrector "cmap"
-
-(3) load system GNL tensor, Lxyz, pre-created form SPH model
->> load('GNLmaps_Lxyz_YourSysRsph.mat', 'Lxyz') % load GNL tensor structure
-
-(4) Build master trace b-corrector over the magnet bore (FOV = 2 x Rsys)
->> cmap = buildSysTrGNLbmap(Lxyz); % average b-correctors are saved in "cmap.cav" structure
-				% and in the 'trGNLmap_YourSystemGNL.mat' file
-
-(5) Generate scan catalogue "ExamDemographics.mat" and "scaninfo.txt" by running:
->> scaninfo_combo; % browse to select exam folder 
-		   % containing (multi-series) DWI DICOM 
-
-(6) Copy "ExamDemographics.mat" and "scaninfo.txt" files from exam-folder 
-to analysis-folder and open "scaninfo.txt" in any editor to view scan catalogue.
-
-(7) Load "ExamSeries" structure from "ExamDemographics.mat" into workspace by running:
->> load('ExamDemographics.mat', 'ExamSeries'); es = ExamSeries;
-
-(8) Load "CMAP" structure for average system GNL b-correction into workspace by running:
->> load('trGNLmap_YourSystemGNL.mat', 'cmap') % load GNL tensor structure
-
-(9) Use "scaninfo.txt" to find "SeriesNumber" and "Folder" for each DWI series 
-of interest and run:
->> cbm = buildGNCav4trdwi_combo(serinf(indx), cmap, fovc); % will prompt to provide series number
-					% from "scaninfo.txt" if "indx" omitted; fovc = 2 x Rsph
-						% saves corrector maps in image frame
-						% and series-nifti pars in "...s#_CMAPs.mat"
-
-****NOTE2: To apply correction directly to ADC maps generated "off-line" (and stored as DICOM), 
-       the user may run the following workflow (with "cbm" corrector pre-generated for DWI):
->> xadc = readdicom7_combo2022wip(0,0,'dv'); % browse and select ADC series DICOM 
-					% generated off-line for the same DWI series 
-					% used to build correctors
->> adcm = getsafield_combo(xadc); % read 3D ADC map into Matlab array (or load your ADC map)
-
->> adcmc = adcm./cbm.cav; % apply average ADC map correction pixel-by-pixel to generate GNC-ADC
 
 
 ---------------------------------------------------------------------------------------
